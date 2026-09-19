@@ -2,7 +2,7 @@ export default async function handler(req,res){
   if(req.method!=="POST") return res.status(405).json({error:"POST only"});
   const key=process.env.POLLINATIONS_KEY;
   if(!key) return res.status(500).json({error:"POLLINATIONS_KEY belum dipasang di Vercel."});
-  const {prompt,model="ltx-2",duration=5,aspectRatio="9:16"}=req.body||{};
+  const {prompt,model="alibaba/wan-2.2-fast",duration=5,aspectRatio="9:16"}=req.body||{};
   if(!prompt) return res.status(400).json({error:"prompt wajib diisi"});
   const qs=new URLSearchParams({model,duration:String(duration),aspectRatio});
   const url="https://gen.pollinations.ai/video/"+encodeURIComponent(prompt)+"?"+qs.toString();
